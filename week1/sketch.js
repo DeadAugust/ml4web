@@ -2,11 +2,17 @@ let video;
 let classifier;
 
 function setup(){
-  noCanvas();
-
+  // noCanvas();
   video = createCapture(VIDEO);
+  createCanvas(width,height - video.height);
+  background(0,255,200);
+
   //set up image classifier with MobileNet and the video
-  classifier = ml5.imageClassifier('Mobile Net', video, modelReady);
+  classifier = ml5.imageClassifier('MobileNet', video, modelReady);
+}
+
+function draw(){
+  
 }
 
 function modelReady(){
