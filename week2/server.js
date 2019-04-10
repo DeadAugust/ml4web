@@ -51,6 +51,7 @@ god.on('connection', function (socket) {
     console.log('start');
     players.emit('start');
     rat.emit('start');
+    condom.emit('start');
   });
 
   // Listen for data messages
@@ -61,6 +62,7 @@ god.on('connection', function (socket) {
     // Send data to all clients
     players.emit('update', world);
     rat.emit('update', world);
+    condom.emit('update', world);
   });
 
   // Listen for this input client to disconnect
@@ -99,7 +101,39 @@ rat.on('connection', function (socket) {
   // Listen for this input client to disconnect
   // Tell all clients, this input client disconnected
   socket.on('disconnect', function () {
-    console.log("God disconnected " + socket.id);
+    console.log("Rat disconnected " + socket.id);
+    // players.emit('disconnected', socket.id);
+  });
+});
+
+let condom = io.of('/contraception'); //need individual?
+// Listen for input clients to connect
+condom.on('connection', function (socket) {
+  console.log('Condom connected: ' + socket.id);
+
+  //on start
+  // socket.on('start', function(){
+  //   console.log('start');
+  //   players.emit('start');
+  // });
+
+  // Listen for data messages
+  socket.on('data', function (world) {
+    // Data comes in as whatever was sent, including objects
+    console.log(world);
+
+    // Send data to all clients
+    players.emit('update', world);
+  });
+
+  socket.on('condom', function(conPos){
+    god.emit('condom', conPos);
+  });
+
+  // Listen for this input client to disconnect
+  // Tell all clients, this input client disconnected
+  socket.on('disconnect', function () {
+    console.log("Condom disconnected " + socket.id);
     // players.emit('disconnected', socket.id);
   });
 });

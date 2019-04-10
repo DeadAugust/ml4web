@@ -43,6 +43,9 @@ let food = [];
 let rat;
 let ratX = -100;
 let ratY = -100;
+let condom;
+let conX = -100;
+let conY = -100;
 
 class Food {
   constructor() {
@@ -166,6 +169,7 @@ class Godling { //need high up b/c not hoisted?
 
 function preload(){
   rat = loadImage('../assets/rat.png');
+  condom = loadImage('../assets/condom.png');
 }
 function setup() {
   cnv = createCanvas(windowWidth, windowHeight);
@@ -194,6 +198,10 @@ function setup() {
     ratX = ratPos.x;
     ratY = ratPos.y;
   });
+  socket.on('condom', function(conPos){
+    conX = conPos.x;
+    conY = conPos.y;
+  });
   //starting stuff
   bloom();
 }
@@ -208,6 +216,8 @@ function draw() {
         food.splice(i, 1);
       }
     }
+    //condom
+    image(condom, conX, conY, 70, 70);
       //display food
     for (let f = food.length - 1; f >= 0; f--) {
       if (food.supply <= 0) {
@@ -218,6 +228,10 @@ function draw() {
     }
     for (let i = godlings.length - 1; i >= 0; i--) {
       godlings[i].move();
+      //condom effect
+      if (dist(conX, conY, godlings[i].x, godlings[i].y) < (godlings[i].size)){
+        godlings[i].fertility = false;
+      }
       // godlings[i].collide(i);
       godlings[i].show();
     }
