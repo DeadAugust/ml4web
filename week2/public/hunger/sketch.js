@@ -190,6 +190,11 @@ function draw() {
       //show
       ellipse(dog.x, dog.y, dog.size, dog.size);
     }
-    image(rat, mouseX, mouseY, 50, 50);
+    image(rat, mouseX, mouseY, 70, 50);
+    let ratPos = {
+      x: mouseX,
+      y: mouseY
+    }
+    socket.emit('rat', ratPos);
   }
 }

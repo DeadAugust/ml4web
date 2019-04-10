@@ -92,6 +92,10 @@ rat.on('connection', function (socket) {
     players.emit('update', world);
   });
 
+  socket.on('rat', function(ratPos){
+    god.emit('rat', ratPos);
+  });
+
   // Listen for this input client to disconnect
   // Tell all clients, this input client disconnected
   socket.on('disconnect', function () {

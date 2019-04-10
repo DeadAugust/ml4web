@@ -40,6 +40,9 @@ let godLeftRight = [-1, 1];
 
 let godlings = [];
 let food = [];
+let rat;
+let ratX = -100;
+let ratY = -100;
 
 class Food {
   constructor() {
@@ -160,6 +163,10 @@ class Godling { //need high up b/c not hoisted?
   }
 }
 
+
+function preload(){
+  rat = loadImage('../assets/rat.png');
+}
 function setup() {
   cnv = createCanvas(windowWidth, windowHeight);
   cnv.parent('canvasContainer');
@@ -183,6 +190,10 @@ function setup() {
   //   let data = message.data;
   // }
 
+  socket.on('rat', function(ratPos){
+    ratX = ratPos.x;
+    ratY = ratPos.y;
+  });
   //starting stuff
   bloom();
 }
@@ -190,6 +201,14 @@ function setup() {
 function draw() {
   if (start) {
     background(0);
+    //rat
+    image(rat, ratX, ratY, 70, 50);
+    for (let i = food.length -1; i >= 0; i--){
+      if (dist(ratX, ratY, food[i].x, food[i].y) < (food[i].size)){
+        food.splice(i, 1);
+      }
+    }
+      //display food
     for (let f = food.length - 1; f >= 0; f--) {
       if (food.supply <= 0) {
         food.splice(f, 1);
