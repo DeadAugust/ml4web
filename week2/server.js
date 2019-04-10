@@ -40,3 +40,31 @@ players.on('connection', function (socket) {
     players.emit('disconnected', socket.id);
   });
 });
+//
+// let god = io.of('/god'); //need individual?
+// // Listen for input clients to connect
+// god.on('connection', function (socket) {
+//   console.log('God connected: ' + socket.id);
+//
+//   // Listen for data messages
+//   socket.on('data', function (data) {
+//     // Data comes in as whatever was sent, including objects
+//     //console.log("Received: 'message' " + data);
+//
+//     // Wrap up data in message
+//     let message = {
+//       id : socket.id,
+//       data : data
+//     }
+//
+//     // Send data to all clients
+//     io.socket.emit('message', message);
+//   });
+//
+//   // Listen for this input client to disconnect
+//   // Tell all clients, this input client disconnected
+//   socket.on('disconnect', function () {
+//     console.log("God disconnected " + socket.id);
+//     // players.emit('disconnected', socket.id);
+//   });
+// });

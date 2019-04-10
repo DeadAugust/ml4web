@@ -1,0 +1,90 @@
+<!--
+ Copyright (c) 2018 ml5
+
+ This software is released under the MIT License.
+ https://opensource.org/licenses/MIT
+-->
+
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>KNN Classification on Webcam Images with mobileNet. Built with p5.js</title>
+
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
+  <script src="https://unpkg.com/ml5@0.1.2/dist/ml5.min.js" type="text/javascript"></script>
+
+  <style>
+    button {
+      margin: 6px 6px 6px 0;
+      padding: 4px;
+      font-size: 14px;
+    }
+
+    video {
+      width: 300;
+      height: 300;
+    }
+
+    p {
+      display: inline;
+      font-size: 16px;
+    }
+
+    .emoji {
+      font-size: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="canvasContainer"></div>
+  <h2>KNN Classification on Webcam Images with mobileNet. Built with p5.js</h2>
+  <div id="videoContainer"></div>
+  <p id="status">Loading Model...</p>
+  <br>
+  <p>
+
+    <span class="emoji"> ⚡ </span><button id="addSmite">Add a Smite</button>
+    <button id="resetSmite">Reset Smite</button>
+    <p><span id="exampleSmite">0</span> Smite examples</p>
+    <p>| Confidence in Smite is: <span id="confidenceSmite">0</span></p>
+
+    <br><span class="emoji"> 👶 </span><button id="addFertilize">Add a Fertilize</button>
+    <button id="resetFertilize">Reset Fertilize</button>
+    <p><span id="exampleFertilize">0</span> Fertilize examples</p>
+    <p>| Confidence in Fertilize is: <span id="confidenceFertilize">0</span></p>
+
+    <br><span class="emoji"> 🍗 </span><button id="addFood">Add Food</button>
+    <button id="resetFood">Reset Food</button>
+    <p><span id="exampleFood">0</span> Food examples</p>
+    <p>| Confidence in Food is: <span id="confidenceFood">0</span></p>
+
+    <br><span class="emoji"> 🌱 </span><button id="addHope">Add Hope</button>
+    <button id="resetHope">Reset Hope</button>
+    <p><span id="exampleHope">0</span> Hope examples</p>
+    <p>| Confidence in Hope is: <span id="confidenceHope">0</span></p>
+
+    <br><span class="emoji"> ☀️ </span><button id="addJoy">Add Joy</button>
+    <button id="resetJoy">Reset Joy</button>
+    <p><span id="exampleJoy">0</span> Joy examples</p>
+    <p>| Confidence in Joy is: <span id="confidenceJoy">0</span></p>
+
+  </p>
+  <br />
+  <p>
+    <button id="buttonPredict">Start predicting!</button><br>
+    <button id="clearAll">Clear all classes</button><br>
+  </p>
+  <p>
+    KNN Classifier with mobileNet model labeled this
+    as Class: <span id="result">...</span>
+    with a confidence of <span id="confidence">...</span>
+  </p>
+  <!-- <div><button id="save">Save Dataset</button></div> -->
+  <script src="sketch.js"></script>
+</body>
+
+</html>
