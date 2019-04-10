@@ -184,7 +184,7 @@ function setup() {
   // }
 
   //starting stuff
-  bloom()
+  bloom();
 }
 
 function draw() {
@@ -221,6 +221,12 @@ function draw() {
         godlings.splice(i, 1);
       }
     }
+    let world = {
+      godlings: godlings,
+      food: food
+    }
+    console.log(world);
+    socket.emit('data', world);
   }
 }
 
@@ -269,6 +275,7 @@ function classify() {
   }
   if (!start) {
     start = true;
+    socket.emit('start');
   }
   // Get the features of the input video
   const features = featureExtractor.infer(video);
@@ -393,7 +400,6 @@ function gotResults(err, result) { //prob where the action happens
       for (let g of godlings) {
         g.joy += 50;
         g.joy = constrain(g.joy, 0, godJoy);
-
       }
     }
 

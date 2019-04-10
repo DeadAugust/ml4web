@@ -18,19 +18,19 @@ let players = io.of('/'); //need individual?
 players.on('connection', function (socket) {
   console.log('A player connected: ' + socket.id);
 
-  // Listen for data messages
-  socket.on('data', function (data) {
-    // Data comes in as whatever was sent, including objects
-    //console.log("Received: 'message' " + data);
+  //on start
+  socket.on('start', function(){
+    console.log('start');
+    players.emit('start');
+  });
 
-    // Wrap up data in message
-    let message = {
-      id : socket.id,
-      data : data
-    }
+  // Listen for data messages
+  socket.on('data', function (world) {
+    // Data comes in as whatever was sent, including objects
+    console.log(world);
 
     // Send data to all clients
-    players.emit('message', message);
+    players.emit('update', world);
   });
 
   // Listen for this input client to disconnect
@@ -40,31 +40,62 @@ players.on('connection', function (socket) {
     players.emit('disconnected', socket.id);
   });
 });
-//
-// let god = io.of('/god'); //need individual?
-// // Listen for input clients to connect
-// god.on('connection', function (socket) {
-//   console.log('God connected: ' + socket.id);
-//
-//   // Listen for data messages
-//   socket.on('data', function (data) {
-//     // Data comes in as whatever was sent, including objects
-//     //console.log("Received: 'message' " + data);
-//
-//     // Wrap up data in message
-//     let message = {
-//       id : socket.id,
-//       data : data
-//     }
-//
-//     // Send data to all clients
-//     io.socket.emit('message', message);
-//   });
-//
-//   // Listen for this input client to disconnect
-//   // Tell all clients, this input client disconnected
-//   socket.on('disconnect', function () {
-//     console.log("God disconnected " + socket.id);
-//     // players.emit('disconnected', socket.id);
-//   });
-// });
+
+let god = io.of('/god'); //need individual?
+// Listen for input clients to connect
+god.on('connection', function (socket) {
+  console.log('God connected: ' + socket.id);
+
+  //on start
+  socket.on('start', function(){
+    console.log('start');
+    players.emit('start');
+    rat.emit('start');
+  });
+
+  // Listen for data messages
+  socket.on('data', function (world) {
+    // Data comes in as whatever was sent, including objects
+    console.log(world);
+
+    // Send data to all clients
+    players.emit('update', world);
+    rat.emit('update', world);
+  });
+
+  // Listen for this input client to disconnect
+  // Tell all clients, this input client disconnected
+  socket.on('disconnect', function () {
+    console.log("God disconnected " + socket.id);
+    // players.emit('disconnected', socket.id);
+  });
+});
+
+
+let rat = io.of('/hunger'); //need individual?
+// Listen for input clients to connect
+rat.on('connection', function (socket) {
+  console.log('Rat connected: ' + socket.id);
+
+  //on start
+  // socket.on('start', function(){
+  //   console.log('start');
+  //   players.emit('start');
+  // });
+
+  // Listen for data messages
+  socket.on('data', function (world) {
+    // Data comes in as whatever was sent, including objects
+    console.log(world);
+
+    // Send data to all clients
+    players.emit('update', world);
+  });
+
+  // Listen for this input client to disconnect
+  // Tell all clients, this input client disconnected
+  socket.on('disconnect', function () {
+    console.log("God disconnected " + socket.id);
+    // players.emit('disconnected', socket.id);
+  });
+});
