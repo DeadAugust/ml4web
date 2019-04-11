@@ -308,7 +308,11 @@ function classify() {
   }
   if (!start) {
     start = true;
-    socket.emit('start');
+    let dimensions = {
+      width: width,
+      height: height
+    }
+    socket.emit('start', dimensions);
   }
   // Get the features of the input video
   const features = featureExtractor.infer(video);

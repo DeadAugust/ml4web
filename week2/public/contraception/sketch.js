@@ -150,8 +150,9 @@ class Godling { //need high up b/c not hoisted?
 function setup() {
   createCanvas(windowWidth, windowHeight);
   imageMode(CENTER);
-  socket.on('start', function(){
+  socket.on('start', function(dimensions){
     start = true;
+    resizeCanvas(dimensions.width, dimensions.length);
   });
   // Listen for message
   socket.on('update', function (world) {

@@ -47,11 +47,11 @@ god.on('connection', function (socket) {
   console.log('God connected: ' + socket.id);
 
   //on start
-  socket.on('start', function(){
+  socket.on('start', function(dimensions){
     console.log('start');
     players.emit('start');
-    rat.emit('start');
-    condom.emit('start');
+    rat.emit('start', dimensions);
+    condom.emit('start', dimensions);
   });
 
   // Listen for data messages
