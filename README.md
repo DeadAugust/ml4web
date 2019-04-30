@@ -6,7 +6,10 @@ Machine Learning for Web -- Class Assignments
 
 
 ### Week 1 -- MobileNet
-Mobile Net Water Bottle Example
+[Mobile Net Water Bottle Example](https://deadaugust.github.io/ml4web/week1/)
 
 ### Week 2 -- KNN Classifier
-KeNNosis -- Teachable Godlings
+[KeNNosis -- Teachable Godlings](https://deadaugust.github.io/ml4web/week2/)
+
+### Fast Style Transfer -- Meow Wolf Webcam
+[Try it out!](https://deadaugust.github.io/ml4web/meowWolf_styleTransfer/)
