@@ -18,12 +18,12 @@
 let preTrainedModel = null;
 let humanArena = null;
 
-async function downloadPretrained() {
+async function downloadPretrainedPit() {
   if (!preTrainedModel) {
     // if (!humanGame) {
     const humanGame = new TicTacToeGame();
     // }
-    preTrainedModel = new NNet(humanGame);
+    preTrainedModel = new NNetWrapper(humanGame);
     // firstPlayr = new players.RandomPlayer(g);
     await preTrainedModel.loadPretrained('https://grimmer.io/alphago-tictactoe-keras-trained/model.json');
   }
@@ -80,11 +80,11 @@ function play(mode, aiFirst) {
     };
     firstPlayr = { play: n1p };
   } else {
-    firstPlayr = new players.RandomPlayer(g);
+    firstPlayr = new RandomPlayer(g);
   }
 
   if (mode === 3 || mode === 4) {
-    const hp = new players.HumanTicTacToePlayer(g);// .play
+    const hp = new HumanTicTacToePlayer(g);// .play
     if (aiFirst) {
       humanArena = new Arena(firstPlayr, hp, g, display);
     } else {
@@ -97,7 +97,7 @@ function play(mode, aiFirst) {
 
 
   // const rp = new players.RandomPlayer(g);// .play;
-  const rp2 = new players.RandomPlayer(g);// .play;
+  const rp2 = new RandomPlayer(g);// .play;
 
   const arena = new Arena(firstPlayr, rp2, g, display);
   console.log(arena.playGames(25, false));

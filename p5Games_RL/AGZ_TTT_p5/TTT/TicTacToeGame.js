@@ -1,12 +1,12 @@
 // import { Game } from '../Game';
 // import Board from './TicTacToeLogic';
 // import nj from 'numjs';
-
+// var nj = require('numjs');
 // Grimmer: This class needs a lot of numpy operations
 class TicTacToeGame extends Game {
   constructor(n = 3) {
     super();
-    console.log('TicTacToeGame constructer');
+    console.log('TicTacToeGame constructor');
     // board size, 3x3 for TicTacToeGame
     this.n = n;
   }

@@ -132,7 +132,8 @@ class Coach {
 
       const nmcts = new MCTS(this.game, this.nnet, this.args);
       console.log('PITTING AGAINST Random VERSION');
-      const firstPlayr = new players.RandomPlayer(this.game);
+      // const firstPlayr = new players.RandomPlayer(this.game);
+      const firstPlayr = new RandomPlayer(this.game);
       const arena = new Arena(
         firstPlayr,
         // { play: x => Utils.argmax(pmcts.getActionProb(x, 0)) },

@@ -85,7 +85,9 @@ class NNetWrapper extends NeuralNet {
     console.log('load model start');
 
     // 'https://foo.bar/tfjs_artifacts/model.json'
-    this.preTrainedModel = await tf.loadModel(url);
+    // this.preTrainedModel = await tf.loadModel(url); //no longer works with tf 1.0
+    this.preTrainedModel = await tf.loadLayersModel(url); 
+
     console.log('load model ok');
   }
 

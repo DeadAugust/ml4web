@@ -27,7 +27,7 @@ function getTrainedNN() {
 
 async function train() {
   const g = new TicTacToeGame();
-  const nnet = new NNet(g);
+  const nnet = new NNetWrapper(g);
 
   trainedNN = nnet;
 

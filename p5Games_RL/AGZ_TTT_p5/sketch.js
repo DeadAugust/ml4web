@@ -19,7 +19,7 @@ let aiCheck, startNewGameButt;
 function setup() {
   let canvas = createCanvas(400, 600);
   canvas.parent('canvasContainer');
-
+  background(122);
   //set up set up set up
   settings = createDiv('SETTINGS')
     .parent('settingsContainer')
@@ -27,16 +27,16 @@ function setup() {
 
   //- - - - - - - - - all the butts
   //
-  twoRandomButt = createButton('Two Random Players Game') //what does this mean?
-    // .position()
-    .parent("settings")
-    .mousePressed(twoRandomPlay);
+  // twoRandomButt = createButton('Two Random Players Game') //what does this mean?
+  //   // .position()
+  //   .parent("settings")
+  //   .mousePressed(twoRandomPlay);
   //start self train in browser
   startTrainButt = createButton('Start Self Train')
     // .position()
     .parent("settings")
     .mousePressed(startTrain);
-  //self trained vs Random ???
+  //self trained vs Random
   selfTrainVSRandomButt = createButton('Self Trained vs Random')
     // .position()
     .parent("settings")
@@ -88,9 +88,9 @@ state = {
   selfTrained: false
 };
 
-twoRandomPlay =() => {
-  play();
-}
+// twoRandomPlay =() => {
+//   play();
+// }
 
 startTrain = async () => {
   console.log('start-train');
@@ -112,7 +112,7 @@ twoRandomPlayWithPretrained = async () => {
 downloadPretrained = async () => {
   if (state.aiIsDownloaded === false) {
     console.log('ui start to download');
-    await downloadPretrained();
+    await downloadPretrainedPit();
     console.log('ui start to download2');
     // this.setState({ aiIsDownloaded: true });
     state.aiIsDownloaded = true;
