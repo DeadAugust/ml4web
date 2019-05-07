@@ -1,4 +1,4 @@
-export class RandomPlayer {
+class RandomPlayer {
   constructor(game) {
     console.log('RandomPlayer constructer');
     this.game = game;
@@ -18,7 +18,7 @@ export class RandomPlayer {
   }
 }
 
-export class HumanTicTacToePlayer {
+class HumanTicTacToePlayer {
   constructor(game) {
     console.log('HumanTicTacToePlayer constructer');
     this.game = game;

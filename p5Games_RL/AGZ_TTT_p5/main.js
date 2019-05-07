@@ -1,6 +1,6 @@
-import Coach from './Coach';
-import { TicTacToeGame } from './tictactoe/TicTacToeGame';
-import { NNetWrapper as NNet } from './tictactoe/tensorflow/NNet';
+// import Coach from './Coach';
+// import { TicTacToeGame } from './tictactoe/TicTacToeGame';
+// import { NNetWrapper as NNet } from './tictactoe/tensorflow/NNet';
 
 const args = {
   numIters: 3,
@@ -21,11 +21,11 @@ const args = {
 
 let trainedNN = null;
 
-export function getTrainedNN() {
+function getTrainedNN() {
   return trainedNN;
 }
 
-export default async function train() {
+async function train() {
   const g = new TicTacToeGame();
   const nnet = new NNet(g);
 

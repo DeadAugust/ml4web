@@ -1,9 +1,9 @@
-import { Game } from '../Game';
-import Board from './TicTacToeLogic';
-import nj from 'numjs';
+// import { Game } from '../Game';
+// import Board from './TicTacToeLogic';
+// import nj from 'numjs';
 
 // Grimmer: This class needs a lot of numpy operations
-export class TicTacToeGame extends Game {
+class TicTacToeGame extends Game {
   constructor(n = 3) {
     super();
     console.log('TicTacToeGame constructer');
@@ -166,7 +166,7 @@ function flush() {
   console.log(log);
 }
 
-export function display(boardNdArray) {
+function display(boardNdArray) {
   log = '';
   const n = boardNdArray.shape[0];
   const list = boardNdArray.tolist();

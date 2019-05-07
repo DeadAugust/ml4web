@@ -1,9 +1,8 @@
-import MCTS from './MCTS';
-import Utils from './Utils';
-import Arena from './Arena';
-import * as players from './tictactoe/TicTacToePlayers';
-
-export default class Coach {
+// import MCTS from './MCTS';
+// import Utils from './Utils';
+// import Arena from './Arena';
+// import * as players from './tictactoe/TicTacToePlayers';
+class Coach {
   // """
   // This class executes the self-play + learning. It uses the functions defined
   // in Game and NeuralNet. args are specified in main.py.

@@ -1,6 +1,5 @@
-export class NeuralNet {
+class NeuralNet {
   constructor() {
     console.log('NeuralNet constructer');
   }
 }
-

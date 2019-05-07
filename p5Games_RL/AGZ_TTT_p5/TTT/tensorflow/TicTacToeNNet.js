@@ -1,6 +1,6 @@
-import * as tf from '@tensorflow/tfjs';
+// import * as tf from '@tensorflow/tfjs';
 
-export default class TicTacToeNNet {
+class TicTacToeNNet {
   constructor(game, args) {
     console.log('TicTacToeNNet constructer');
 
@@ -68,7 +68,7 @@ export default class TicTacToeNNet {
   }
 }
 
-export function test() {
+function test() {
   console.log('t1');
   const model = tf.sequential();
   model.add(tf.layers.dense({ units: 1, inputShape: [1] }));

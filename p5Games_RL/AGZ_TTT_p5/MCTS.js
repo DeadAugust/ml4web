@@ -1,9 +1,9 @@
-import Utils from './Utils';
-import nj from 'numjs';
+// import Utils from './Utils';
+// import nj from 'numjs';
 
 const EPS = 1e-8;
 
-export default class MCTS {
+class MCTS {
   constructor(game, nnet, args) {
     console.log('MCTS constructer');
     this.game = game;

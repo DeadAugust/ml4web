@@ -1,14 +1,14 @@
-import Arena from './Arena';
-import MCTS from './MCTS';
-import Utils from './Utils';
-import { getTrainedNN } from './main';
-
-import { TicTacToeGame, display } from './tictactoe/TicTacToeGame';
-
-import { NNetWrapper as NNet } from './tictactoe/tensorflow/NNet';
+// import Arena from './Arena';
+// import MCTS from './MCTS';
+// import Utils from './Utils';
+// import { getTrainedNN } from './main';
+//
+// import { TicTacToeGame, display } from './tictactoe/TicTacToeGame';
+//
+// import { NNetWrapper as NNet } from './tictactoe/tensorflow/NNet';
 // from tictactoe.keras.NNet import NNetWrapper
-
-import * as players from './tictactoe/TicTacToePlayers';
+//
+// import * as players from './tictactoe/TicTacToePlayers';
 // from tictactoe.TicTacToePlayers import *
 
 // TicTacToeGame reference
@@ -18,7 +18,7 @@ import * as players from './tictactoe/TicTacToePlayers';
 let preTrainedModel = null;
 let humanArena = null;
 
-export async function downloadPretrained() {
+async function downloadPretrained() {
   if (!preTrainedModel) {
     // if (!humanGame) {
     const humanGame = new TicTacToeGame();
@@ -29,7 +29,7 @@ export async function downloadPretrained() {
   }
 }
 
-export function humanMove(action) {
+function humanMove(action) {
   if (humanArena) {
     return humanArena.humanStep(action);
   }
@@ -46,7 +46,7 @@ export function humanMove(action) {
  *  3: 1 pretrained vs human
  *  4: self-treained vs human
  */
-export default function play(mode, aiFirst) {
+function play(mode, aiFirst) {
   const g = new TicTacToeGame();
   const args1 = { numMCTSSims: 50, cpuct: 1.0 };
   let n1;
@@ -65,7 +65,7 @@ export default function play(mode, aiFirst) {
       console.log('no preTrainedModel, return');
       return;
     }
-    console.log('load pretraind to play');
+    console.log('load pretrained to play');
   } else {
     console.log('invalid mode, return');
     return;

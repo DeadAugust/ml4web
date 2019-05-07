@@ -1,9 +1,9 @@
-import { NeuralNet } from '../../NeuralNet';
-import * as tf from '@tensorflow/tfjs';
+// import { NeuralNet } from '../../NeuralNet';
+// import * as tf from '@tensorflow/tfjs';
+//
+// import TicTacToeNNet from './TicTacToeNNet';
 
-import TicTacToeNNet from './TicTacToeNNet';
-
-const args = {
+const argsNN = {
   lr: 0.001,
   dropout: 0.3,
   epochs: 8, // 10,
@@ -12,10 +12,10 @@ const args = {
   num_channels: 512,
 };
 
-export class NNetWrapper extends NeuralNet {
+class NNetWrapper extends NeuralNet {
   constructor(game) {
     super();
-    this.nnet = new TicTacToeNNet(game, args);
+    this.nnet = new TicTacToeNNet(game, argsNN);
     const { a, b } = game.getBoardSize();
     this.board_x = a;
     this.board_y = b;
@@ -26,7 +26,7 @@ export class NNetWrapper extends NeuralNet {
   }
 
   async train(examples) {
-    console.log('train -1. epoch size:', args.batch_size);
+    console.log('train -1. epoch size:', argsNN.batch_size);
     console.log('examples:', examples);
     const total = examples.length;
 
@@ -60,13 +60,13 @@ export class NNetWrapper extends NeuralNet {
     // target_pis = np.asarray(target_pis)
     // target_vs = np.asarray(target_vs)
     // self.nnet.model.fit(x = input_boards, y = [target_pis, target_vs],
-    // batch_size = args.batch_size, epochs = args.epochs)
+    // batch_size = argsNN.batch_size, epochs = argsNN.epochs)
 
     // try {
     const history = await this.nnet.model.fit(xTrain, [yTrain1, yTrain2], {
       shuffle: true,
-      batchSize: args.batch_size,
-      epochs: args.epochs, // params.epochs, //iris, default 40, use epoch as batch
+      batchSize: argsNN.batch_size,
+      epochs: argsNN.epochs, // params.epochs, //iris, default 40, use epoch as batch
       callbacks: {
         onEpochEnd: (epoch, logs) => {
           console.log('onEpochEnd');

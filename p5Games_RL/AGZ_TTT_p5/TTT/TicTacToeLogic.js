@@ -1,6 +1,6 @@
 const __directions = [(1, 1), (1, 0), (1, -1), (0, -1), (-1, -1), (-1, 0), (-1, 1), (0, 1)];
 
-export default class Board {
+class Board {
   constructor(n = 3) {
     this.n = n;
 
