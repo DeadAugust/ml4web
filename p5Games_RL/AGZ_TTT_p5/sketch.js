@@ -15,11 +15,22 @@ let twoRandomButt, startTrainButt, selfTrainVsRandomButt;
 let twoRandomWithPreTrainedButt, downloadPretrainedButt;
 let aiCheck, startNewGameButt;
 
+//Tic Tac Toe board
+let squares = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+// let squares = ["X", "X", "O",  "O",  "X",  "X",  "O", "O",  "X"];
+
+let squareSize, textSpot;
+let gameStarted = false;
+let gameOver = false;
 
 function setup() {
   let canvas = createCanvas(400, 600);
   canvas.parent('canvasContainer');
-  background(122);
+  squareSize = width/3;
+  textSpot = width/6;
+  textSize(height/6);
+  textAlign(CENTER, CENTER);
+  background(255);
   //set up set up set up
   settings = createDiv('SETTINGS')
     .parent('settingsContainer')
@@ -72,9 +83,44 @@ function setup() {
 }
 
 function draw(){
+  if (gameStarted){
+    fill(255);
+  } else if (gameOver){
+    fill(255, 200, 200);
+  } else {
+    fill(125);
+  }
+  //draw the board
+  stroke(0);
+  let x = 0;
+  let y = 0;
+  for (let i = 0; i < squares.length; i++){
+    rect(x*squareSize, y*squareSize, squareSize, squareSize);
+    //if there have been moves, draw them
+    if (squares[i] != 0){ // X: -1, O: 1
+      push();
+      fill(0);
+      noStroke
+      if (squares[i] == -1){
+        text("X", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
+      } else{// it's 1
+        text("O", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
+      }
+      pop();
+    }
+    //move the next square spot
+    if (x < 2){
+      x++;
+    } else {
+      y++;
+      x = 0;
+    }
+  }
+}
 
-
-
+//when human player, click to play
+function mousePressed(){
+  // if (humanPlaying)
 }
 
 
@@ -124,7 +170,7 @@ toggleAI = () => {
   state.enabledAI = !state.enabledAI;
 }
 
-//need this?
+//need this? need to implement on mousePressed
 handleClick = action => humanMove(action)
 
 startNewGame = () => {
@@ -133,6 +179,7 @@ startNewGame = () => {
     if (state.selfTrained === false && state.aiIsDownloaded === false) {
       alert('ai is not download yet');
     }
+    gameStarted = true;
     let action;
     if (state.selfTrained) {
       action = play(4, state.aiFirst);
@@ -140,7 +187,7 @@ startNewGame = () => {
       action = play(3, state.aiFirst);
     }
     // this.setState((prevState, props) => ({ aiFirst: !prevState.aiFirst }));
-    state.aiFirst = !state.aiFirst; //no idea if this is what this is supposed to be
+    state.aiFirst = !state.aiFirst; //I'm guessing it just takes turns?
 
     if (action >= 0) {
       console.log('ai starts at:', action);
