@@ -13,3 +13,6 @@ Machine Learning for Web -- Class Assignments
 
 ### Fast Style Transfer -- Meow Wolf Webcam
 [Try it out!](https://deadaugust.github.io/ml4web/meowWolf_styleTransfer/)
+
+### Alpha Zero General playing Tic Tac Toe in p5 using tf.js
+[Train and Play!](https://deadaugust.github.io/ml4web/p5Games_RL/AGZ_TTT_p5/)
