@@ -14,6 +14,12 @@
 let twoRandomButt, startTrainButt, selfTrainVsRandomButt;
 let twoRandomWithPreTrainedButt, downloadPretrainedButt;
 let aiCheck, startNewGameButt;
+let p1radio, p2radio;
+let p1wins = 0;
+let p2wins = 0;
+let drawsTotal = 0;
+let slowTimer = 50;
+let awaitToggle = true;
 
 //Tic Tac Toe board
 let squares = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
@@ -32,31 +38,38 @@ function setup() {
   textAlign(CENTER, CENTER);
   background(255);
   //set up set up set up
-  settings = createDiv('Training Settings: ')
+  training = createDiv('Training: ')
+    .parent('settingsContainer')
+    .id('training');
+  demoGames = createDiv('Demo Games: ')
+    .parent('settingsContainer')
+    .id('demoGames');
+  playerSettings = createDiv('Player Settings: ')
     .parent('settingsContainer')
     .id('settings');
 
+
   //- - - - - - - - - all the butts
   //
-  // twoRandomButt = createButton('Two Random Players Game') //what does this mean?
-  //   // .position()
-  //   .parent("settings")
-  //   .mousePressed(twoRandomPlay);
+  twoRandomButt = createButton('Two Random Players Game') //what does this mean?
+    // .position()
+    .parent("demoGames")
+    .mousePressed(twoRandomPlay);
   //start self train in browser
   startTrainButt = createButton('Start Self Train')
     // .position()
-    .parent("settings")
+    .parent("training")
     .mousePressed(startTrain);
   //self trained vs Random
   selfTrainVSRandomButt = createButton('Self Trained vs Random')
     // .position()
-    .parent("settings")
+    .parent("demoGames")
     .mousePressed(selfTrainVSRandom);
 
   //pretrained vs random games ???
   twoRandomWithPreTrainedButt = createButton('Start pretrained vs Random Games')
     // .position()
-    .parent("settings")
+    .parent("demoGames")
     .mousePressed(twoRandomPlayWithPretrained);
   //enable AI player checkbox
   aiCheck = createCheckbox("Enable AI Player", state.enabledAI)
@@ -72,7 +85,7 @@ function setup() {
   //download pretrained model
   downloadPretrainedButt = createButton("Download pretrained model")
     // .position()
-    .parent("settings")
+    .parent("training")
     .mousePressed(downloadPretrained);
   //download pretrained model
   startNewGameButt = createButton("Start Game?") //not sure what this is
@@ -80,67 +93,64 @@ function setup() {
     .parent("settings")
     .mousePressed(startNewGame);
 
+  //player choices
+  //how to make look better on page...
+  // p1div = createDiv('PLAYER ONE')
+  //   .parent("settings")
+  //   // .style("width", "100px");
+  // p1radio = createRadio("p1div");
+  //   p1radio.option('human')
+  //   p1radio.option('preTrained')
+  //   p1radio.option('selfTrained')
+  //   p1radio.option('random')
+  //   p1radio.style('width', '60px');
+  //   p1radio.parent('settings');
+  // p2div = createDiv('PLAYER TWO')
+  //   .parent("settings");
+  // p2radio = createRadio("p2div")
+  //   p2radio.option('human')
+  //   p2radio.option('preTrained')
+  //   p2radio.option('selfTrained')
+  //   p2radio.option('random')
+  //   p2radio.style('width', '60px');
+  //   p2radio.parent('settings');
+
+
     //empty board to start
     drawGame(squares);
 }
 
 function draw(){
-  // if (gameStarted){
-  //   fill(255);
-  // } else if (gameOver){
-  //   fill(255, 200, 200);
-  // } else {
-  //   fill(125);
-  // }
-  // //draw the board
-  // stroke(0);
-  // for (let y = 0; y < 3; y ++){ //row
-  //   for (let x = 0; x < 3; x++){ //col
-  //     rect(x*squareSize, y*squareSize, squareSize, squareSize);
-  //     if (squares[y][x] != 0){ // X: -1, O: 1
-  //       push();
-  //       fill(0);
-  //       noStroke();
-  //       if (squares[y][x] == -1){
-  //         text("X", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
-  //       } else{// it's 1
-  //         text("O", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
-  //       }
-  //       pop();
-  //     }
-  //   }
-  // }
+  background(255);
+  // console.log("draw squares" + squares);
+  drawGame(squares);
+  push();
+  fill(0);
+  textSize(height/10);
+  textAlign(LEFT);
+  text("p1 wins: " + p1wins, 10, 450);
+  text("p2 wins: " + p2wins, 10, 500);
+  text("draws: " + drawsTotal, 10, 550);
+  pop();
 }
-
-
-
-  // let x = 0;
-  // let y = 0;
-  // for (let i = 0; i < squares.length; i++){
-  //   rect(x*squareSize, y*squareSize, squareSize, squareSize);
-  //   //if there have been moves, draw them
-  //   if (squares[i] != 0){ // X: -1, O: 1
-  //     push();
-  //     fill(0);
-  //     noStroke
-  //     if (squares[i] == -1){
-  //       text("X", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
-  //     } else{// it's 1
-  //       text("O", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
-  //     }
-  //     pop();
-  //   }
-  //   //move the next square spot
-  //   if (x < 2){
-  //     x++;
-  //   } else {
-  //     y++;
-  //     x = 0;
-  //   }
 
 //when human player, click to play
 function mousePressed(){
-  // if (humanPlaying)
+  // if (humanPlaying) {
+  //   humanStep(0);
+  //
+  // }
+  let count = 0;
+  for (let y = 0; y < 3; y ++){ //row
+    for (let x = 0; x < 3; x++){ //col
+      if (mouseX > x*squareSize && mouseX < (x+1)*squareSize
+      && mouseY > y * squareSize && mouseY < (y+1)*squareSize){
+        console.log(count);
+        humanMove(count);
+      }
+      count++;
+    }
+  }
 }
 
 
@@ -153,7 +163,7 @@ function drawGame(squares){
     } else if (gameOver){
       fill(255, 200, 200);
     } else {
-      fill(125);
+      fill(205);
     }
     //draw the board -- should I only do this once?
     stroke(0);
@@ -166,15 +176,19 @@ function drawGame(squares){
           noStroke();
           if (squares[y][x] == -1){
             text("X", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
+            // console.log(" DRAW X ")
           } else{// it's 1
             text("O", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
+            // console.log(" DRAW O ")
           }
           pop();
         }
       }
     }
-    // console.log('in promise');
-  // });
+  // console.log("2" + awaitToggle);
+  // awaitToggle = true;
+  // console.log("3" + awaitToggle);
+
 }
 
 
@@ -182,20 +196,24 @@ function drawGame(squares){
 // "this.state" now just "state"
 // and "randowm" now "random"
 state = {
-  enabledAI: false,
+  enabledAI: true,
   aiIsDownloaded: false,
   aiFirst: true,
   selfTrained: false
 };
 
-// twoRandomPlay =() => {
-//   play();
-// }
+twoRandomPlay =() => {
+  play(0);
+}
 
 startTrain = async () => {
   console.log('start-train');
+  let mill = millis()/1000;
+  console.log(mill);
   await train();
   console.log('end-train');
+  let mill2 = millis()/1000;
+  console.log(mill2);
   // this.setState({ selfTrained: true });
   state.selfTrained = true;
 }
@@ -213,7 +231,7 @@ downloadPretrained = async () => {
   if (state.aiIsDownloaded === false) {
     console.log('ui start to download');
     await downloadPretrainedPit();
-    console.log('ui start to download2');
+    console.log('model downloaded');
     // this.setState({ aiIsDownloaded: true });
     state.aiIsDownloaded = true;
   }
@@ -225,15 +243,16 @@ toggleAI = () => {
 }
 
 //need this? need to implement on mousePressed
-handleClick = action => humanMove(action)
+// handleClick = action => humanMove(action)
 
 startNewGame = () => {
   console.log('start new game');
+  squares = [[],[],[]];
   if (state.enabledAI) {
     if (state.selfTrained === false && state.aiIsDownloaded === false) {
       alert('ai is not download yet');
     }
-    gameStarted = true;
+    // gameStarted = true;
     let action;
     if (state.selfTrained) {
       action = play(4, state.aiFirst);

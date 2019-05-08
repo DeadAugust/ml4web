@@ -66,6 +66,9 @@ function play(mode, aiFirst) {
       return;
     }
     console.log('load pretrained to play');
+  } else if (mode === 0) {
+    firstPlayr = new RandomPlayer(g);
+
   } else {
     console.log('invalid mode, return');
     return;
@@ -76,6 +79,15 @@ function play(mode, aiFirst) {
 
     const n1p = (x) => {
       const list = mcts1.getActionProb(x, 0);
+      //try and assign to squares -- no, this is just one
+      // let count = 0;
+      // for (let y = 0; y < 3; y ++){ //row
+      //   for (let x = 0; x < 3; x++){ //col
+      //     squares[y][x] = list[count];
+      //     count++;
+      //   }
+      // }
+      // console.log(squares);
       return Utils.argmax(list);
     };
     firstPlayr = { play: n1p };
@@ -85,9 +97,13 @@ function play(mode, aiFirst) {
 
   if (mode === 3 || mode === 4) {
     const hp = new HumanTicTacToePlayer(g);// .play
+    // console.log(display);
     if (aiFirst) {
       humanArena = new Arena(firstPlayr, hp, g, display);
-    } else {
+    } else {  // if (humanPlaying) {
+  //   humanStep(0);
+  //
+  // }
       humanArena = new Arena(hp, firstPlayr, g, display);
     }
     const action = humanArena.playNewGameWithHuman();

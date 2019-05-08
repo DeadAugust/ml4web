@@ -170,7 +170,11 @@ function display(boardNdArray) {
   log = '';
   const n = boardNdArray.shape[0];
   const list = boardNdArray.tolist();
+
   print('  ', '');
+  // console.log("n", n);
+  // console.log("list", list);
+  // squares = list;
   //commented b/c pointless
   // for (let y = 0; y < n; y++) {
   //   print(`${y}`, ' ');
@@ -185,13 +189,27 @@ function display(boardNdArray) {
 
   print('--');
   //clear squares??
-  for (let y = 0; y < 3; y++){
-    for (let x = 0; x < 3; x++){
-      squares[y][x] = 0;
-    }
-  }
-  console.log(squares);
-  //set up squares from the weird list thing
+  // let squaresClean = [[],[],[]];
+  // console.log(squaresClean);
+  // for (let y = 0; y < 3; y++){
+  //   for (let x = 0; x < 3; x++){
+  //     squaresClean[y][x] = 0;
+  //     console.log('now');
+  //   }
+  // }
+  // console.log(squaresClean);
+
+  // //set up squares from the weird list thing
+  //this is still only one at a time?
+  // // let count = 0;
+  // for (let y = 0; y < 3; y ++){ //row
+  //   for (let x = 0; x < 3; x++){ //col
+  //     squares[y][x] = list[y][x];
+  //     // count++;
+  //   }
+  // }
+  // console.log(squares);
+
   for (let y = 0; y < n; y++) {
     print(`${y}|`, ''); // # print the row #
     for (let x = 0; x < n; x++) {
@@ -199,10 +217,10 @@ function display(boardNdArray) {
       const piece = list[y][x]; // # get the piece to print
       if (piece === -1) {
         print('X ', '');
-        squares[y][x] = -1;
+        // squaresClean[y][x] = -1;
       } else if (piece === 1) {
         print('O ', '');
-        squares[y][x] = 1;
+        // squaresClean[y][x] = 1;
       } else if (x == n) {
         print('-', '');
       } else {
@@ -213,10 +231,9 @@ function display(boardNdArray) {
     print('|');
   }
 
-  //show on board
-  console.log(squares);
-  drawGame(squares);
-
+  // //show on board
+  // console.log(squaresClean);
+  // drawGame(squaresClean);
   // await drawGame(squares);
 
   // print(' ', '');

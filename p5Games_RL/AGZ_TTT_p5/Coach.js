@@ -8,7 +8,7 @@ class Coach {
   // in Game and NeuralNet. args are specified in main.py.
   // """
   constructor(game, nnet, args) {
-    console.log('Coach constructer');
+    console.log('Coach constructor');
     this.game = game;
     this.nnet = nnet;
     // this.pnet = null; // this.nnet.constructor(this.game);
@@ -84,7 +84,7 @@ class Coach {
 
         console.log('start %d eposides', this.args.numEps);
         for (let j = 0; j < this.args.numEps; j++) {
-          console.log('eposides-%d', j);
+          console.log('episodes-%d', j);
           this.mcts = new MCTS(this.game, this.nnet, this.args);
           const episodeResult = this.executeEpisode();
           iterationTrainExamples = iterationTrainExamples.concat(episodeResult);

@@ -5,7 +5,7 @@ const EPS = 1e-8;
 
 class MCTS {
   constructor(game, nnet, args) {
-    console.log('MCTS constructer');
+    console.log('MCTS constructor');
     this.game = game;
     this.nnet = nnet;
     this.args = args;
