@@ -16,7 +16,7 @@ let twoRandomWithPreTrainedButt, downloadPretrainedButt;
 let aiCheck, startNewGameButt;
 
 //Tic Tac Toe board
-let squares = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+let squares = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 // let squares = ["X", "X", "O",  "O",  "X",  "X",  "O", "O",  "X"];
 
 let squareSize, textSpot;
@@ -32,7 +32,7 @@ function setup() {
   textAlign(CENTER, CENTER);
   background(255);
   //set up set up set up
-  settings = createDiv('SETTINGS')
+  settings = createDiv('Training Settings: ')
     .parent('settingsContainer')
     .id('settings');
 
@@ -80,47 +80,101 @@ function setup() {
     .parent("settings")
     .mousePressed(startNewGame);
 
+    //empty board to start
+    drawGame(squares);
 }
 
 function draw(){
-  if (gameStarted){
-    fill(255);
-  } else if (gameOver){
-    fill(255, 200, 200);
-  } else {
-    fill(125);
-  }
-  //draw the board
-  stroke(0);
-  let x = 0;
-  let y = 0;
-  for (let i = 0; i < squares.length; i++){
-    rect(x*squareSize, y*squareSize, squareSize, squareSize);
-    //if there have been moves, draw them
-    if (squares[i] != 0){ // X: -1, O: 1
-      push();
-      fill(0);
-      noStroke
-      if (squares[i] == -1){
-        text("X", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
-      } else{// it's 1
-        text("O", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
-      }
-      pop();
-    }
-    //move the next square spot
-    if (x < 2){
-      x++;
-    } else {
-      y++;
-      x = 0;
-    }
-  }
+  // if (gameStarted){
+  //   fill(255);
+  // } else if (gameOver){
+  //   fill(255, 200, 200);
+  // } else {
+  //   fill(125);
+  // }
+  // //draw the board
+  // stroke(0);
+  // for (let y = 0; y < 3; y ++){ //row
+  //   for (let x = 0; x < 3; x++){ //col
+  //     rect(x*squareSize, y*squareSize, squareSize, squareSize);
+  //     if (squares[y][x] != 0){ // X: -1, O: 1
+  //       push();
+  //       fill(0);
+  //       noStroke();
+  //       if (squares[y][x] == -1){
+  //         text("X", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
+  //       } else{// it's 1
+  //         text("O", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
+  //       }
+  //       pop();
+  //     }
+  //   }
+  // }
 }
+
+
+
+  // let x = 0;
+  // let y = 0;
+  // for (let i = 0; i < squares.length; i++){
+  //   rect(x*squareSize, y*squareSize, squareSize, squareSize);
+  //   //if there have been moves, draw them
+  //   if (squares[i] != 0){ // X: -1, O: 1
+  //     push();
+  //     fill(0);
+  //     noStroke
+  //     if (squares[i] == -1){
+  //       text("X", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
+  //     } else{// it's 1
+  //       text("O", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
+  //     }
+  //     pop();
+  //   }
+  //   //move the next square spot
+  //   if (x < 2){
+  //     x++;
+  //   } else {
+  //     y++;
+  //     x = 0;
+  //   }
 
 //when human player, click to play
 function mousePressed(){
   // if (humanPlaying)
+}
+
+
+//draw game function
+function drawGame(squares){
+  // console.log('test');
+  // return new Promise(resolve => {
+    if (gameStarted){
+      fill(255);
+    } else if (gameOver){
+      fill(255, 200, 200);
+    } else {
+      fill(125);
+    }
+    //draw the board -- should I only do this once?
+    stroke(0);
+    for (let y = 0; y < 3; y ++){ //row
+      for (let x = 0; x < 3; x++){ //col
+        rect(x*squareSize, y*squareSize, squareSize, squareSize);
+        if (squares[y][x] != 0){ // X: -1, O: 1
+          push();
+          fill(0);
+          noStroke();
+          if (squares[y][x] == -1){
+            text("X", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
+          } else{// it's 1
+            text("O", ((x*2)+1)*textSpot, ((y*2)+1)*textSpot);
+          }
+          pop();
+        }
+      }
+    }
+    // console.log('in promise');
+  // });
 }
 
 

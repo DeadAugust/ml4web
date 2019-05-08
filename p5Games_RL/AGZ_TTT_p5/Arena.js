@@ -137,6 +137,7 @@ class Arena {
     return this.tryToPlayAIStep();
   }
 
+  //this is each individual game from start to finish
   playGame(verbose = false) {
     const players = [this.player2, null, this.player1];
     let curPlayer = 1;
@@ -172,7 +173,7 @@ class Arena {
     return this.game.getGameEnded(boardNdArray, 1);
   }
 
-
+  //so this is the total number of plays
   playGames(num, verbose = false) {
     // eps_time = AverageMeter()
     // bar = Bar('Arena.playGames', max=num)

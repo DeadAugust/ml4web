@@ -171,42 +171,58 @@ function display(boardNdArray) {
   const n = boardNdArray.shape[0];
   const list = boardNdArray.tolist();
   print('  ', '');
-  // Pyton:
-  // for y in range(n):
-  //     print (y,"", end="")
-  for (let y = 0; y < n; y++) {
-    print(`${y}`, ' ');
-  }
-
-  print('');
-  print(' ', '');
-
-  for (let _ = 0; _ < n; _++) {
-    print('-', '-');
-  }
+  //commented b/c pointless
+  // for (let y = 0; y < n; y++) {
+  //   print(`${y}`, ' ');
+  // }
+  //
+  // print('');
+  // print(' ', '');
+  //
+  // for (let _ = 0; _ < n; _++) {
+  //   print('-', '-');
+  // }
 
   print('--');
+  //clear squares??
+  for (let y = 0; y < 3; y++){
+    for (let x = 0; x < 3; x++){
+      squares[y][x] = 0;
+    }
+  }
+  console.log(squares);
+  //set up squares from the weird list thing
   for (let y = 0; y < n; y++) {
     print(`${y}|`, ''); // # print the row #
     for (let x = 0; x < n; x++) {
+      // squares[y][x] = 0; // whyyyy
       const piece = list[y][x]; // # get the piece to print
       if (piece === -1) {
         print('X ', '');
+        squares[y][x] = -1;
       } else if (piece === 1) {
         print('O ', '');
+        squares[y][x] = 1;
       } else if (x == n) {
         print('-', '');
       } else {
         print('- ', '');
       }
+      console.log(piece);
     }
     print('|');
   }
 
-  print(' ', '');
-  for (let _ = 0; _ < n; _++) {
-    print('-', '-');
-  }
+  //show on board
+  console.log(squares);
+  drawGame(squares);
+
+  // await drawGame(squares);
+
+  // print(' ', '');
+  // for (let _ = 0; _ < n; _++) {
+  //   print('-', '-');
+  // }
 
   print('--');
   flush();

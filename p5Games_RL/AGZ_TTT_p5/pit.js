@@ -44,7 +44,7 @@ function humanMove(action) {
  *  1: self-trained vs rp
  *  2: 1 pretrained vs rp
  *  3: 1 pretrained vs human
- *  4: self-treained vs human
+ *  4: self-trained vs human
  */
 function play(mode, aiFirst) {
   const g = new TicTacToeGame();
@@ -100,6 +100,6 @@ function play(mode, aiFirst) {
   const rp2 = new RandomPlayer(g);// .play;
 
   const arena = new Arena(firstPlayr, rp2, g, display);
-  console.log(arena.playGames(25, false));
+  console.log(arena.playGames(25, true));
   console.log('finish');
 }
